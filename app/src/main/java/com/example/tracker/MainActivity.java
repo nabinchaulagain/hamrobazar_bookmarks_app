@@ -3,10 +3,8 @@ package com.example.tracker;
 
 import android.content.Intent;
 import android.os.Bundle;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.Volley;
 import com.example.tracker.misc.AuthTokenHelper;
 import com.example.tracker.misc.NotificationBackgroundJob;
 import com.example.tracker.misc.RequestFactory;
@@ -31,8 +29,7 @@ public class MainActivity extends BaseActivity implements Response.ErrorListener
         }
     }
     public void authenticate(){
-        RequestQueue queue = Volley.newRequestQueue(this);
-        queue.add(RequestFactory.makeJsonObjectRequest(
+        requestQueue.add(RequestFactory.makeJsonObjectRequest(
                 this,
                 com.android.volley.Request.Method.GET,
                 Constants.API_URL+"/auth/user",

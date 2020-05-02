@@ -1,16 +1,8 @@
 package com.example.tracker;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import com.example.tracker.models.User;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.UnsupportedEncodingException;
 
 public class LoginActivity extends BaseActivity{
     AuthForm authForm;
@@ -20,6 +12,7 @@ public class LoginActivity extends BaseActivity{
         setContentView(R.layout.activity_login);
         getSupportActionBar().hide();
         authForm = findViewById(R.id.authForm);
+        authForm.setRequestQueue(requestQueue);
     }
     public void goToRegisterScreen(View view){
         Intent intent = new Intent(this,SignupActivity.class);

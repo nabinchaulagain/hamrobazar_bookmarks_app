@@ -5,17 +5,32 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
+import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
+
 public class BaseActivity extends AppCompatActivity {
+    protected RequestQueue requestQueue;
+    private NetworkChangeReceiver networkChangeReceiver;
+
     private final BroadcastReceiver refreshReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             BaseActivity.this.recreate();
         }
     };
-    private NetworkChangeReceiver networkChangeReceiver;
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        requestQueue = Volley.newRequestQueue(this);
+    }
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -30,5 +45,11 @@ public class BaseActivity extends AppCompatActivity {
         super.onStop();
         unregisterReceiver(networkChangeReceiver);
         unregisterReceiver(refreshReceiver);
+        requestQueue.cancelAll(new RequestQueue.RequestFilter() {
+            @Override
+            public boolean apply(Request<?> request) {
+                return true;
+            }
+        });
     }
 }

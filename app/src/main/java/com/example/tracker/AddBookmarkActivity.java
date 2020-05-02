@@ -10,11 +10,9 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 import com.example.tracker.misc.RequestFactory;
 import com.example.tracker.models.Bookmark;
 import com.example.tracker.models.BookmarkCriteria;
@@ -74,7 +72,6 @@ public class AddBookmarkActivity extends BaseActivity implements Response.Listen
     }
 
     public void sendRequest(Bookmark bookmark){
-        RequestQueue queue = Volley.newRequestQueue(this);
         JsonObjectRequest request = RequestFactory.makeJsonObjectRequest(
                 this,
                 com.android.volley.Request.Method.POST,
@@ -85,7 +82,7 @@ public class AddBookmarkActivity extends BaseActivity implements Response.Listen
         );
         request.setRetryPolicy(new DefaultRetryPolicy(12000,DefaultRetryPolicy.DEFAULT_MAX_RETRIES,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         request.setShouldRetryServerErrors(false);
-        queue.add(request);
+        requestQueue.add(request);
     }
 
     public boolean validate(Bookmark values){

@@ -5,10 +5,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.Volley;
 import com.example.tracker.adapters.NotificationAdapter;
 import com.example.tracker.misc.RequestFactory;
 import com.example.tracker.models.Notification;
@@ -33,7 +31,6 @@ public class NotificationsActivity extends BottomNavigationActivity implements R
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         dropDown.setAdapter(adapter);
         dropDown.setOnItemSelectedListener(this);
-        RequestQueue queue = Volley.newRequestQueue(this);
         JsonArrayRequest request = RequestFactory.makeJsonArrayRequest(
                 this,
                 JsonArrayRequest.Method.GET,
@@ -42,7 +39,7 @@ public class NotificationsActivity extends BottomNavigationActivity implements R
                 this,
                 null
         );
-        queue.add(request);
+        requestQueue.add(request);
     }
 
     @Override

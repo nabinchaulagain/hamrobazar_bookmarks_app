@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="PersonView">
-        <attr name="name" format="string"/>
-        <attr name="age" format="integer"/>
-    </declare-styleable>
     <declare-styleable name="AuthForm">
         <attr name="actionBtnText" format="string"/>
         <attr name="apiEndpoint" format="string"/>

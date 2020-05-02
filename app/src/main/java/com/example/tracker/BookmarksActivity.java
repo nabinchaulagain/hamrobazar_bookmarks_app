@@ -12,13 +12,9 @@ import android.graphics.Canvas;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
-
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 import com.example.tracker.adapters.BookmarkAdapter;
 import com.example.tracker.misc.RequestFactory;
 import com.example.tracker.models.Bookmark;
@@ -43,7 +39,6 @@ public class BookmarksActivity extends BottomNavigationActivity implements Respo
         bookmarksList = findViewById(R.id.bookmarksList);
         progressBar = findViewById(R.id.progressBar);
         bookmarksList.setLayoutManager(new LinearLayoutManager(this));
-        RequestQueue queue = Volley.newRequestQueue(BookmarksActivity.this);
         JsonArrayRequest request = RequestFactory.makeJsonArrayRequest(
                 this,
                 com.android.volley.Request.Method.GET,
@@ -52,7 +47,7 @@ public class BookmarksActivity extends BottomNavigationActivity implements Respo
                 this,
                 this
         );
-        queue.add(request);
+        BookmarksActivity.this.requestQueue.add(request);
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(getItemTouchCallback());
         itemTouchHelper.attachToRecyclerView(bookmarksList);
     }
@@ -109,8 +104,7 @@ public class BookmarksActivity extends BottomNavigationActivity implements Respo
                 Bookmark bookmark = list.get(index);
                 list.remove(index);
                 bookmarksList.getAdapter().notifyItemRemoved(index);
-                RequestQueue queue = Volley.newRequestQueue(BookmarksActivity.this);
-                queue.add(RequestFactory.makeJsonObjectRequest(
+                BookmarksActivity.this.requestQueue.add(RequestFactory.makeJsonObjectRequest(
                         BookmarksActivity.this,
                         com.android.volley.Request.Method.DELETE,
                         Constants.API_URL+"/bookmarks/"+bookmark.getId()

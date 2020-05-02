@@ -13,7 +13,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.tracker.models.User;
 
-public class SignupActivity extends AppCompatActivity {
+public class SignupActivity extends BaseActivity {
     AuthForm authForm;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +21,7 @@ public class SignupActivity extends AppCompatActivity {
         setContentView(R.layout.activity_signup);
         getSupportActionBar().hide();
         authForm = findViewById(R.id.authForm);
+        authForm.setRequestQueue(requestQueue);
     }
     public void goToLoginScreen(View view){
         Intent intent = new Intent(this,LoginActivity.class);

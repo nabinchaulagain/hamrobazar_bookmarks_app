@@ -6,10 +6,8 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 import com.example.tracker.misc.RequestFactory;
 import com.example.tracker.models.Bookmark;
 import com.example.tracker.models.BookmarkCriteria;
@@ -28,7 +26,6 @@ public class BookmarkActivity extends BaseActivity implements Response.Listener<
         String bookmarkId = getIntent().getStringExtra("bookmarkId");
         searchCriteriaList = findViewById(R.id.searchCriteriaList);
         bookmarkNotifications = findViewById(R.id.bookmarkNotifications);
-        RequestQueue queue = Volley.newRequestQueue(this);
         JsonObjectRequest request = RequestFactory.makeJsonObjectRequest(
                 this,
                 Request.Method.GET,
@@ -37,7 +34,7 @@ public class BookmarkActivity extends BaseActivity implements Response.Listener<
                 this,
                 null
         );
-        queue.add(request);
+        requestQueue.add(request);
     }
 
     @Override

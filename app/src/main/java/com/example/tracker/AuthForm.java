@@ -15,7 +15,6 @@ import androidx.annotation.Nullable;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.Volley;
 import com.example.tracker.misc.AuthTokenHelper;
 import com.example.tracker.misc.NotificationBackgroundJob;
 import com.example.tracker.misc.RequestFactory;
@@ -34,6 +33,7 @@ public class AuthForm extends LinearLayout implements Response.Listener<JSONObje
     private Button actionBtn;
     private String apiEndpoint;
     private ProgressDialog progressDialog;
+    private RequestQueue requestQueue;
 
     public AuthForm(Context context) {
         super(context);
@@ -47,6 +47,9 @@ public class AuthForm extends LinearLayout implements Response.Listener<JSONObje
     public AuthForm(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initializeView(context,attrs);
+    }
+    public void setRequestQueue(RequestQueue queue){
+        requestQueue = queue;
     }
     private void initializeView(Context context,AttributeSet set){
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -79,8 +82,7 @@ public class AuthForm extends LinearLayout implements Response.Listener<JSONObje
             progressDialog = new ProgressDialog(getContext(),"Authenticating...");
         }
         progressDialog.show();
-        RequestQueue queue = Volley.newRequestQueue(context);
-        queue.add(RequestFactory.makeJsonObjectRequest(
+        requestQueue.add(RequestFactory.makeJsonObjectRequest(
                 getContext(),
                 com.android.volley.Request.Method.POST,
                 Constants.API_URL + apiEndpoint,
