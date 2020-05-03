@@ -140,7 +140,8 @@ public class AuthForm extends LinearLayout implements Response.Listener<JSONObje
             String token = response.getString("token");
             Context context = getContext();
             AuthTokenHelper.saveToken(context,token);
-            Intent intent = new Intent(context,BookmarksActivity.class);
+            Intent intent = new Intent(context,MainActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             context.startActivity(intent);
             NotificationBackgroundJob.start(context);
             progressDialog.dismiss();

@@ -1,74 +1,70 @@
 package com.example.tracker;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.example.tracker.misc.AuthTokenHelper;
-import com.example.tracker.misc.NotificationBackgroundJob;
-import com.example.tracker.misc.RequestFactory;
-import org.json.JSONException;
-import org.json.JSONObject;
+import android.view.MenuItem;
 
-import java.util.Timer;
-import java.util.TimerTask;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class MainActivity extends BaseActivity implements Response.ErrorListener,Response.Listener<JSONObject> {
+public class MainActivity extends BaseActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
+    private BottomNavigationView bottomNav;
+    private AlertDialog exitDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        getSupportActionBar().hide();
-        String token = AuthTokenHelper.getToken(this);
-        if(token == null){
-           goToLoginScreen();
+        if(savedInstanceState == null){
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer,
+                    new BookmarksFragment()).commit();
         }
-        else{
-            authenticate();
-        }
-    }
-    public void authenticate(){
-        requestQueue.add(RequestFactory.makeJsonObjectRequest(
-                this,
-                com.android.volley.Request.Method.GET,
-                Constants.API_URL+"/auth/user",
-                null,
-                this,
-                this
-                )
-        );
+        bottomNav = findViewById(R.id.navigation);
+        bottomNav.setOnNavigationItemSelectedListener(this);
     }
 
     @Override
-    public void onErrorResponse(VolleyError error) {
-       error.printStackTrace();
+    public void onBackPressed() {
+        if (exitDialog == null) {
+            exitDialog = new AlertDialog.Builder(this)
+                    .setIcon(R.drawable.ic_warning_black_24dp)
+                    .setTitle("Exit")
+                    .setMessage("Are you sure you want to exit???")
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            MainActivity.super.onBackPressed();
+                        }
+
+                    })
+                    .setNegativeButton("No", null)
+                    .create();
+        }
+        exitDialog.show();
     }
 
     @Override
-    public void onResponse(JSONObject response) {
-        try{
-            boolean isLoggedIn = response.getBoolean("isLoggedIn");
-            if(isLoggedIn){
-                NotificationBackgroundJob.start(this);
-                Intent intent = new Intent(this,BookmarksActivity.class);
-                startActivity(intent);
-            }
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        Fragment newFragment;
+        switch (item.getItemId()){
+            case R.id.navigation_notifications:
+                newFragment = new NotificationsFragment();
+                setTitle("Your notifications");
+                break;
+            default:
+                newFragment = new BookmarksFragment();
+                setTitle("Your bookmarks");
         }
-        catch (JSONException ex){
-            ex.printStackTrace();
-        }
-    }
-    public void goToLoginScreen(){
-        TimerTask task = new TimerTask() {
-            @Override
-            public void run() {
-                Intent intent = new Intent(MainActivity.this,LoginActivity.class);
-                finishAffinity();
-                startActivity(intent);
-            }
-        };
-        Timer timer = new Timer();
-        timer.schedule(task,3000);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.fragmentContainer,newFragment);
+        transaction.commit();
+        return true;
     }
 }

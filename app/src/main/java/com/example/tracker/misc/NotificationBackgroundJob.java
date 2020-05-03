@@ -24,7 +24,6 @@ public class NotificationBackgroundJob {
         JobScheduler scheduler =(JobScheduler) context.getSystemService(Context.JOB_SCHEDULER_SERVICE);
         List<JobInfo> jobs = scheduler.getAllPendingJobs();
         if(jobs.size() != 0){
-            System.out.println("Job was started");
         }
         else{
             ComponentName componentName = new ComponentName(context, NotificationService.class);

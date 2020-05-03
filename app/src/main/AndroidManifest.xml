@@ -12,17 +12,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true">
-        <activity android:name=".SignupActivity"></activity>
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".NotificationsActivity" />
-        <activity android:name=".BookmarkActivity" />
-        <activity android:name=".AddBookmarkActivity" />
-        <activity android:name=".BookmarksActivity" />
-        <activity android:name=".MainActivity">
+        android:usesCleartextTraffic="true"
+
+        >
+        <activity android:name=".MainActivity"  android:configChanges="orientation|screenSize"></activity>
+        <activity android:name=".SignupActivity" android:configChanges="orientation|screenSize" />
+        <activity android:name=".LoginActivity" android:configChanges="orientation|screenSize"/>
+        <activity android:name=".BookmarkActivity" android:configChanges="orientation|screenSize" />
+        <activity android:name=".AddBookmarkActivity" android:configChanges="orientation|screenSize"/>
+        <activity android:name=".SplashActivity" android:configChanges="orientation|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

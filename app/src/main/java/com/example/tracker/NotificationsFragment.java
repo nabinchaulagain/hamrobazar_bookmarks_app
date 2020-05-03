@@ -1,50 +1,62 @@
 package com.example.tracker;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
 import com.android.volley.Response;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.example.tracker.adapters.NotificationAdapter;
 import com.example.tracker.misc.RequestFactory;
 import com.example.tracker.models.Notification;
+
 import org.json.JSONArray;
+
 import java.util.ArrayList;
 
-public class NotificationsActivity extends BottomNavigationActivity implements Response.Listener<JSONArray>,AdapterView.OnItemSelectedListener {
+public class NotificationsFragment extends Fragment  implements Response.Listener<JSONArray>, AdapterView.OnItemSelectedListener {
     ArrayList<Notification> notificationArrayList;
     NotificationList notificationList;
     Spinner dropDown;
-    static String dropDownOptions[] = new String[]{"any", "viewed", "not viewed"};
-    static boolean isLoading = true;
+    String dropDownOptions[] = new String[]{"any", "viewed", "not viewed"};
+    boolean isLoading = true;
+
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_notifications);
-        super.initialize();
-        notificationList = findViewById(R.id.notificationList);
-        dropDown = findViewById(R.id.dropdown);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_notifications,container,false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        notificationList = view.findViewById(R.id.notificationList);
+        dropDown = view.findViewById(R.id.dropdown);
         notificationArrayList = new ArrayList<>();
-        ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_dropdown_item,dropDownOptions);
+        ArrayAdapter adapter = new ArrayAdapter(getContext(),android.R.layout.simple_spinner_dropdown_item,dropDownOptions);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         dropDown.setAdapter(adapter);
         dropDown.setOnItemSelectedListener(this);
         JsonArrayRequest request = RequestFactory.makeJsonArrayRequest(
-                this,
+                getContext(),
                 JsonArrayRequest.Method.GET,
                 Constants.API_URL+"/notifications",
                 null,
                 this,
                 null
         );
-        requestQueue.add(request);
+        ((BaseActivity) getActivity()).requestQueue.add(request);
     }
-
     @Override
     public void onResponse(JSONArray response) {
-        System.out.println(response.toString());
         notificationList.initializeList(response);
         notificationArrayList = ((NotificationAdapter)notificationList.getAdapter()).getNotificationList();
         isLoading = false;
@@ -68,11 +80,8 @@ public class NotificationsActivity extends BottomNavigationActivity implements R
             else if(criteria == dropDownOptions[2] && !notification.isNotified()){
                 newNotifications.add(notification);
             }
-            else{
-                System.out.println("else when item selected");
-            }
         }
-        NotificationAdapter adapter = (new NotificationAdapter(this,newNotifications));
+        NotificationAdapter adapter = (new NotificationAdapter(getContext(),newNotifications));
         notificationList.setAdapter(adapter);
     }
 

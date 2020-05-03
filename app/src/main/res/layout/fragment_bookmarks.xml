@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".BookmarksActivity">
+    tools:context=".BookmarksFragment"
+    >
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/bookmarksList"
@@ -37,25 +38,20 @@
         android:id="@+id/floatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
         android:alpha="0.6"
         android:clickable="true"
         android:focusable="true"
         android:focusableInTouchMode="true"
-        android:onClick="goToAddBookmark"
         app:backgroundTint="#6A6969"
         app:fabCustomSize="84dp"
         app:fabSize="auto"
-        app:layout_constraintBottom_toTopOf="@+id/navigation"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.938"
         app:layout_constraintStart_toStartOf="parent"
         app:maxImageSize="52dp"
         app:srcCompat="@drawable/ic_add_black_24dp" />
 
-    <include
-        layout="@layout/bottom_navigation"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"></include>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

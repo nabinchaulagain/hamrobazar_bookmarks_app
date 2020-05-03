@@ -117,14 +117,14 @@ public class AddBookmarkActivity extends BaseActivity implements Response.Listen
     public void onErrorResponse(VolleyError error) {
         error.printStackTrace();
         Toast.makeText(this,"Bookmark added",Toast.LENGTH_LONG).show();
-        Intent intent = new Intent(this,BookmarksActivity.class);
+        Intent intent = new Intent(this,MainActivity.class);
         startActivity(intent);
     }
 
     @Override
     public void onResponse(JSONObject response) {
         Toast.makeText(this,"Bookmark added",Toast.LENGTH_LONG).show();
-        Intent intent = new Intent(this,BookmarksActivity.class);
+        Intent intent = new Intent(this,MainActivity.class);
         startActivity(intent);
     }
 }
