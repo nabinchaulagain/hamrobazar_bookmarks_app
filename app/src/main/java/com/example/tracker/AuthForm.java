@@ -123,7 +123,7 @@ public class AuthForm extends LinearLayout implements Response.Listener<JSONObje
                 setUsernameError(errorObj.getString("username"));
             }
             if(errorObj.has("password")){
-                setUsernameError(errorObj.getString("password"));
+                setPasswordError(errorObj.getString("password"));
             }
         }
         catch (UnsupportedEncodingException e) {

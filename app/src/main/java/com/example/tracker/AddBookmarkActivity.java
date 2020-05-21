@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -13,6 +12,7 @@ import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.example.tracker.misc.ProgressDialog;
 import com.example.tracker.misc.RequestFactory;
 import com.example.tracker.models.Bookmark;
 import com.example.tracker.models.BookmarkCriteria;
@@ -23,7 +23,6 @@ public class AddBookmarkActivity extends BaseActivity implements Response.Listen
     private Spinner conditionDropdown;
     private static String options[] = {"any","new","used"};
     private EditText bookmarkName,searchWord,priceMin,priceMax;
-    private ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +30,6 @@ public class AddBookmarkActivity extends BaseActivity implements Response.Listen
         setTitle("Add a bookmark");
         conditionDropdown = findViewById(R.id.spinner);
         bookmarkName = findViewById(R.id.bookmarkName);
-        progressBar = findViewById(R.id.progressBar);
         searchWord = findViewById(R.id.searchWord);
         priceMax = findViewById(R.id.priceMax);
         priceMin = findViewById(R.id.priceMin);
@@ -67,7 +65,8 @@ public class AddBookmarkActivity extends BaseActivity implements Response.Listen
         if (!hasError){
             sendRequest(bookmark);
             findViewById(R.id.bookmarkForm).setVisibility(View.GONE);
-            progressBar.setVisibility(View.VISIBLE);
+            ProgressDialog dailog = new ProgressDialog(this,"Adding bookmark...");
+            dailog.show();
         }
     }
 

@@ -12,9 +12,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.example.tracker.misc.AuthTokenHelper;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class MainActivity extends BaseActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends BaseActivity implements BottomNavigationView.OnNavigationItemSelectedListener,LogoutListener {
     private BottomNavigationView bottomNav;
     private AlertDialog exitDialog;
     @Override
@@ -25,6 +26,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer,
                     new BookmarksFragment()).commit();
         }
+        System.out.println(AuthTokenHelper.getToken(this));
         bottomNav = findViewById(R.id.navigation);
         bottomNav.setOnNavigationItemSelectedListener(this);
     }
@@ -57,6 +59,9 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
                 newFragment = new NotificationsFragment();
                 setTitle("Your notifications");
                 break;
+            case R.id.navigation_profile:
+                newFragment = new ProfileFragment(this);
+                break;
             default:
                 newFragment = new BookmarksFragment();
                 setTitle("Your bookmarks");
@@ -66,5 +71,13 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         transaction.replace(R.id.fragmentContainer,newFragment);
         transaction.commit();
         return true;
+    }
+
+    @Override
+    public void onLogout() {
+        AuthTokenHelper.deleteToken(this);
+        Intent intent = new Intent(this,LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
 }
