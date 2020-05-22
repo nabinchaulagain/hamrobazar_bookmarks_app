@@ -7,13 +7,9 @@ import android.app.job.JobScheduler;
 import android.content.ComponentName;
 import android.content.Context;
 import android.os.Build;
-import android.os.SystemClock;
-
 import androidx.annotation.RequiresApi;
-
 import com.example.tracker.Constants;
 import com.example.tracker.NotificationService;
-
 import java.util.List;
 
 public class NotificationBackgroundJob {
@@ -23,9 +19,7 @@ public class NotificationBackgroundJob {
         }
         JobScheduler scheduler =(JobScheduler) context.getSystemService(Context.JOB_SCHEDULER_SERVICE);
         List<JobInfo> jobs = scheduler.getAllPendingJobs();
-        if(jobs.size() != 0){
-        }
-        else{
+        if(jobs.size() == 0){
             ComponentName componentName = new ComponentName(context, NotificationService.class);
             JobInfo info = new JobInfo
                     .Builder(Constants.NOTIFICATION_JOB_ID,componentName)
@@ -40,7 +34,7 @@ public class NotificationBackgroundJob {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private static void createNotificationChannel(Context context){
-         NotificationManager notificationManager = (NotificationManager) context.getSystemService(context.NOTIFICATION_SERVICE);
+         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
          if(notificationManager.getNotificationChannel(Constants.NOTIFICATION_CHANNEL_ID) != null){
             return;
          }
@@ -50,5 +44,10 @@ public class NotificationBackgroundJob {
                  NotificationManager.IMPORTANCE_DEFAULT
          );
          notificationManager.createNotificationChannel(channel1);
+    }
+
+    public static void stop(Context context){
+        JobScheduler scheduler = (JobScheduler) context.getSystemService(Context.JOB_SCHEDULER_SERVICE);
+        scheduler.cancelAll();
     }
 }

@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.example.tracker.misc.AuthTokenHelper;
+import com.example.tracker.misc.NotificationBackgroundJob;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends BaseActivity implements BottomNavigationView.OnNavigationItemSelectedListener,LogoutListener {
@@ -26,7 +27,6 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer,
                     new BookmarksFragment()).commit();
         }
-        System.out.println(AuthTokenHelper.getToken(this));
         bottomNav = findViewById(R.id.navigation);
         bottomNav.setOnNavigationItemSelectedListener(this);
     }
@@ -76,6 +76,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
     @Override
     public void onLogout() {
         AuthTokenHelper.deleteToken(this);
+        NotificationBackgroundJob.stop(this);
         Intent intent = new Intent(this,LoginActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);

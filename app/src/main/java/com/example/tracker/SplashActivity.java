@@ -1,6 +1,9 @@
 package com.example.tracker;
 
 
+import android.app.job.JobInfo;
+import android.app.job.JobScheduler;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import com.android.volley.Response;
@@ -11,6 +14,7 @@ import com.example.tracker.misc.RequestFactory;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -27,6 +31,7 @@ public class SplashActivity extends BaseActivity implements Response.ErrorListen
         else{
             authenticate();
         }
+        JobScheduler scheduler =(JobScheduler) this.getSystemService(Context.JOB_SCHEDULER_SERVICE);
     }
     public void authenticate(){
         requestQueue.add(RequestFactory.makeJsonObjectRequest(
