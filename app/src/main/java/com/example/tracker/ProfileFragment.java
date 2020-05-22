@@ -15,13 +15,14 @@ import android.widget.TextView;
 import com.android.volley.Response;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.tracker.misc.RequestFactory;
+import com.example.tracker.models.User;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class ProfileFragment extends Fragment implements Response.Listener<JSONObject> {
     Button logoutBtn;
-    TextView username,bookmarksCount,notificationsCount;
+    TextView username,bookmarksCount,notificationsCount,joinedDate;
     LogoutListener logoutListener;
 
     public ProfileFragment(LogoutListener logoutListener) {
@@ -41,6 +42,7 @@ public class ProfileFragment extends Fragment implements Response.Listener<JSONO
         bookmarksCount = view.findViewById(R.id.bookmarksCount);
         notificationsCount = view.findViewById(R.id.notificationsCount);
         logoutBtn = view.findViewById(R.id.logoutBtn);
+        joinedDate = view.findViewById(R.id.profileJoinedDate);
         JsonObjectRequest request = RequestFactory.makeJsonObjectRequest(
                 this.getContext(),
                 JsonObjectRequest.Method.GET,
@@ -61,13 +63,14 @@ public class ProfileFragment extends Fragment implements Response.Listener<JSONO
     @Override
     public void onResponse(JSONObject response) {
         try {
-            JSONObject user = response.getJSONObject("user");
+            JSONObject userJson = response.getJSONObject("user");
             String notificationsNum = response.getString("notificationsCount");
             String bookmarksNum = response.getString("bookmarksCount");
-            username.setText(user.getString("username"));
+            User user = new User(userJson);
+            username.setText(user.getUsername());
+            joinedDate.setText("joined "+user.getJoinedAt());
             bookmarksCount.setText(bookmarksNum);
             notificationsCount.setText(notificationsNum);
-
         } catch (JSONException e) {
             e.printStackTrace();
         }

@@ -2,6 +2,7 @@ package com.example.tracker.models;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
+import com.example.tracker.misc.DateTimeParser;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -13,7 +14,7 @@ public class Notification {
 
     public Notification(JSONObject object) throws JSONException {
         this.id = object.getString("_id");
-        this.foundAt = object.getString("foundAt");
+        this.foundAt = DateTimeParser.getTimeFrom(object.getString("foundAt"));
         this.isNotified = object.getBoolean("isNotified");
         this.item = new Item(object.getJSONObject("item"));
     }

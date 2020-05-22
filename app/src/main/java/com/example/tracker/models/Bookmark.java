@@ -1,4 +1,6 @@
 package com.example.tracker.models;
+import com.example.tracker.misc.DateTimeParser;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -16,7 +18,7 @@ public class Bookmark {
     public Bookmark(JSONObject jsonObject) throws JSONException{
         this.id = jsonObject.getString("_id");
         this.name = jsonObject.getString("name");
-        this.date = jsonObject.getString("bookmarkedAt");
+        this.date = DateTimeParser.getTimeFrom(jsonObject.getString("bookmarkedAt"));
         this.criteria = new BookmarkCriteria(jsonObject.getJSONObject("criteria"));
     }
 
@@ -46,7 +48,6 @@ public class Bookmark {
             }
         }
         catch(JSONException ex){
-
         }
         return object;
     }

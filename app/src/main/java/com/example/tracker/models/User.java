@@ -1,5 +1,7 @@
 package com.example.tracker.models;
 
+import com.example.tracker.misc.DateTimeParser;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -10,10 +12,8 @@ public class User {
     private String password;
 
     public User(JSONObject object) throws JSONException{
-        this.id = object.getString("_id");
-        this.joinedAt = object.getString("joinedAt");
+        this.joinedAt = DateTimeParser.getTimeFrom(object.getString("joinedAt"));
         this.username = object.getString("username");
-        this.password = object.getString("password");
     }
 
     public User(String username, String password) {

@@ -31,7 +31,6 @@ public class SplashActivity extends BaseActivity implements Response.ErrorListen
         else{
             authenticate();
         }
-        JobScheduler scheduler =(JobScheduler) this.getSystemService(Context.JOB_SCHEDULER_SERVICE);
     }
     public void authenticate(){
         requestQueue.add(RequestFactory.makeJsonObjectRequest(
