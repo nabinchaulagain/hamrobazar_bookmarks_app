@@ -52,10 +52,23 @@
                 android:text="Latest Notifications"
                 android:textAlignment="center"
                 android:textSize="24sp" />
-            <com.example.tracker.NotificationList
-                android:id="@+id/bookmarkNotifications"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/notificationEmptyMsg"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="18dp"
+                    android:textAlignment="center"
+                    android:visibility="gone"
+                    android:layout_marginTop="16dp"
+                    />
+                <com.example.tracker.NotificationList
+                    android:id="@+id/bookmarkNotifications"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </FrameLayout>
         </LinearLayout>
     </LinearLayout>
 

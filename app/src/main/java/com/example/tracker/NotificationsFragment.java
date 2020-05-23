@@ -24,11 +24,12 @@ import org.json.JSONArray;
 import java.util.ArrayList;
 
 public class NotificationsFragment extends Fragment  implements Response.Listener<JSONArray>, AdapterView.OnItemSelectedListener {
-    ArrayList<Notification> notificationArrayList;
-    NotificationList notificationList;
-    Spinner dropDown;
-    String dropDownOptions[] = new String[]{"any", "viewed", "not viewed"};
-    boolean isLoading = true;
+    private ArrayList<Notification> notificationArrayList;
+    private NotificationList notificationList;
+    private Spinner dropDown;
+    private TextView notificationEmptyMsg;
+    private String dropDownOptions[] = new String[]{"any", "viewed", "not viewed"};
+    private boolean isLoading = true;
 
     @Nullable
     @Override
@@ -41,6 +42,7 @@ public class NotificationsFragment extends Fragment  implements Response.Listene
         super.onViewCreated(view, savedInstanceState);
         notificationList = view.findViewById(R.id.notificationList);
         dropDown = view.findViewById(R.id.dropdown);
+        notificationEmptyMsg = view.findViewById(R.id.notificationEmptyMsg);
         notificationArrayList = new ArrayList<>();
         ArrayAdapter adapter = new ArrayAdapter(getContext(),android.R.layout.simple_spinner_dropdown_item,dropDownOptions);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -58,6 +60,10 @@ public class NotificationsFragment extends Fragment  implements Response.Listene
     }
     @Override
     public void onResponse(JSONArray response) {
+        if(response.length() == 0){
+            showEmptyMessage();
+            return;
+        }
         notificationList.initializeList(response);
         notificationArrayList = ((NotificationAdapter)notificationList.getAdapter()).getNotificationList();
         isLoading = false;
@@ -82,6 +88,12 @@ public class NotificationsFragment extends Fragment  implements Response.Listene
                 newNotifications.add(notification);
             }
         }
+        if(newNotifications.size() == 0){
+            showEmptyMessage();
+        }
+        else{
+            notificationEmptyMsg.setVisibility(View.GONE);
+        }
         NotificationAdapter adapter = (new NotificationAdapter(getContext(),newNotifications));
         notificationList.setAdapter(adapter);
     }
@@ -89,5 +101,10 @@ public class NotificationsFragment extends Fragment  implements Response.Listene
     @Override
     public void onNothingSelected(AdapterView parent) {
 
+    }
+
+    private void showEmptyMessage(){
+        notificationEmptyMsg.setText("No notifications were found!!");
+        notificationEmptyMsg.setVisibility(View.VISIBLE);
     }
 }

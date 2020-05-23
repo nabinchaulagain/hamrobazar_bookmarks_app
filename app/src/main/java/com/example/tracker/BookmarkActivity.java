@@ -5,12 +5,16 @@ import android.text.Html;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
+
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.tracker.misc.RequestFactory;
 import com.example.tracker.models.Bookmark;
 import com.example.tracker.models.BookmarkCriteria;
+
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -18,6 +22,7 @@ import org.json.JSONObject;
 public class BookmarkActivity extends BaseActivity implements Response.Listener<JSONObject> {
     ListView searchCriteriaList;
     NotificationList bookmarkNotifications;
+    TextView notificationEmptyMsg;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +31,7 @@ public class BookmarkActivity extends BaseActivity implements Response.Listener<
         String bookmarkId = getIntent().getStringExtra("bookmarkId");
         searchCriteriaList = findViewById(R.id.searchCriteriaList);
         bookmarkNotifications = findViewById(R.id.bookmarkNotifications);
+        notificationEmptyMsg = findViewById(R.id.notificationEmptyMsg);
         JsonObjectRequest request = RequestFactory.makeJsonObjectRequest(
                 this,
                 Request.Method.GET,
@@ -45,7 +51,13 @@ public class BookmarkActivity extends BaseActivity implements Response.Listener<
             findViewById(R.id.bookmarkContainer).setVisibility(View.VISIBLE);
             findViewById(R.id.progressBar).setVisibility(View.GONE);
             initializeCriteriaList(bookmark.getCriteria());
-            bookmarkNotifications.initializeList(response.getJSONArray("notifications"));
+            JSONArray notifications =response.getJSONArray("notifications");
+            if(notifications.length() == 0){
+                notificationEmptyMsg.setVisibility(View.VISIBLE);
+                notificationEmptyMsg.setText("No notifications found !!!");
+                return;
+            }
+            bookmarkNotifications.initializeList(notifications);
         } catch (JSONException e) {
             e.printStackTrace();
         }

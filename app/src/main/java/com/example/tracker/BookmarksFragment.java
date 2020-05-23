@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -36,6 +37,7 @@ public class BookmarksFragment extends Fragment implements Response.Listener<JSO
     private RecyclerView bookmarksList;
     private ProgressBar progressBar;
     private FloatingActionButton addBtn;
+    private TextView bookmarksEmptyMsg;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -49,6 +51,7 @@ public class BookmarksFragment extends Fragment implements Response.Listener<JSO
         bookmarksList = view.findViewById(R.id.bookmarksList);
         progressBar = view.findViewById(R.id.progressBar);
         addBtn = view.findViewById(R.id.floatingActionButton);
+        bookmarksEmptyMsg = view.findViewById(R.id.bookmarksEmptyMsg);
         bookmarksList.setLayoutManager(new LinearLayoutManager(context));
         JsonArrayRequest request = RequestFactory.makeJsonArrayRequest(
                 context,
@@ -76,6 +79,12 @@ public class BookmarksFragment extends Fragment implements Response.Listener<JSO
 
     @Override
     public void onResponse(JSONArray response) {
+        if(response.length() == 0){
+            bookmarksEmptyMsg.setText("No bookmarks found !!!");
+            bookmarksEmptyMsg.setVisibility(View.VISIBLE);
+            progressBar.setVisibility(View.GONE);
+            return;
+        }
         ArrayList<Bookmark> bookmarks = new ArrayList<>();
         for(int i = 0 ; i < response.length(); i++){
             try {
