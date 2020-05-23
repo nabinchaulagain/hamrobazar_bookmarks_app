@@ -61,6 +61,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
                 break;
             case R.id.navigation_profile:
                 newFragment = new ProfileFragment(this);
+                setTitle("Your profile");
                 break;
             default:
                 newFragment = new BookmarksFragment();

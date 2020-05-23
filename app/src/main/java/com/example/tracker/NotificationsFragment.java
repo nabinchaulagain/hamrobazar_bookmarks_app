@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -71,13 +72,13 @@ public class NotificationsFragment extends Fragment  implements Response.Listene
         ArrayList<Notification> newNotifications = new ArrayList<>();
         for(int i = 0; i < notificationArrayList.size();i++){
             Notification notification = notificationArrayList.get(i);
-            if(criteria == dropDownOptions[0]){
+            if(criteria.equals(dropDownOptions[0])){
                 newNotifications.add(notification);
             }
-            else if(criteria == dropDownOptions[1] && notification.isNotified()){
+            else if(criteria.equals(dropDownOptions[1]) && notification.isNotified()){
                 newNotifications.add(notification);
             }
-            else if(criteria == dropDownOptions[2] && !notification.isNotified()){
+            else if(criteria.equals(dropDownOptions[2]) && !notification.isNotified()){
                 newNotifications.add(notification);
             }
         }

@@ -69,6 +69,7 @@ public class SplashActivity extends BaseActivity implements Response.ErrorListen
             @Override
             public void run() {
                 Intent intent = new Intent(SplashActivity.this,LoginActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
             }
         };

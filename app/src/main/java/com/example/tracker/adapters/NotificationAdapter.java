@@ -20,6 +20,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.tracker.Constants;
 import com.example.tracker.R;
+import com.example.tracker.misc.RequestFactory;
 import com.example.tracker.models.Item;
 import com.example.tracker.models.Notification;
 
@@ -81,7 +82,8 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationHolder
 
     public void setNotificationReceived(String notificationId){
         RequestQueue queue = Volley.newRequestQueue(context);
-        queue.add(new JsonObjectRequest(
+        queue.add(RequestFactory.makeJsonObjectRequest(
+                context,
                 Request.Method.POST,
                 Constants.API_URL + "/notifications/"+ notificationId,
                 null,

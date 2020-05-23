@@ -48,12 +48,14 @@ public class Bookmark {
             }
         }
         catch(JSONException ex){
+            ex.printStackTrace();
         }
         return object;
     }
 
     @Override
-    public String toString() {
+    public String
+    toString() {
         return "Bookmark{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +

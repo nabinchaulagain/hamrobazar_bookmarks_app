@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SplashActivity"
-    android:background="#c8a9fc">
+    android:background="@drawable/gradient_background">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -27,7 +27,8 @@
             style="?android:attr/progressBarStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp" />
+            android:layout_marginTop="5dp"
+            android:progressTint="#1164FF" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
