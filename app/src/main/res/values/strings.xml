@@ -16,6 +16,7 @@
     <string name="icon_person_description">person</string>
     <string name="header_bookmarks">Bookmarks</string>
     <string name="header_notifications">Notifications</string>
+    <string name="header_profile">Profile</string>
     <string name="btn_text_logout">Logout</string>
     <string name="icon_down_description">Down</string>
     <string name="icon_up_description">Up</string>

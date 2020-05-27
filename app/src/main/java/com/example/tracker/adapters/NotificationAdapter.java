@@ -51,20 +51,23 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationHolder
         else{
             holder.setAsNotNotified();
         }
-        holder.itemName.setText(item.getName());
+        holder.itemName.setText(item.getMinifiedName());
         holder.itemPrice.setText(context.getResources().getString(R.string.item_price,item.getPrice()));
         holder.foundAt.setText(context.getResources().getString(R.string.item_found_date,notification.getFoundAt()));
         holder.notificationHeader.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 if ((holder.isExpanded)) {
+                    holder.itemName.setText(item.getMinifiedName());
                     holder.collapse();
                 } else {
                     if(!notification.isNotified()){
+
                         setNotificationReceived(notification.getId());
                         notification.setNotified(true);
                         holder.setAsNotified();
                     }
+                    holder.itemName.setText(item.getName());
                     holder.expand();
                 }
             }

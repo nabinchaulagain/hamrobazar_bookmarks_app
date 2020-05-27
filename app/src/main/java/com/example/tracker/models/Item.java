@@ -14,6 +14,13 @@ public class Item {
         this.link = object.getString("link");
     }
 
+    public String getMinifiedName(){
+        int minifiedLength = 30;
+        if(this.name.length() < minifiedLength){
+            return this.name;
+        }
+        return this.name.substring(0,minifiedLength) + "....";
+    }
     public String getName() {
         return name;
     }
