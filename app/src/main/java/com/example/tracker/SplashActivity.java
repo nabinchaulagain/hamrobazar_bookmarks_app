@@ -1,9 +1,5 @@
 package com.example.tracker;
 
-
-import android.app.job.JobInfo;
-import android.app.job.JobScheduler;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import com.android.volley.Response;
@@ -14,7 +10,7 @@ import com.example.tracker.misc.RequestFactory;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.List;
+import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -23,7 +19,7 @@ public class SplashActivity extends BaseActivity implements Response.ErrorListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        getSupportActionBar().hide();
+        Objects.requireNonNull(getSupportActionBar()).hide();
         String token = AuthTokenHelper.getToken(this);
         if(token == null){
            goToLoginScreen();

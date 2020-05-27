@@ -1,5 +1,7 @@
 package com.example.tracker.models;
 
+import androidx.annotation.NonNull;
+
 import com.example.tracker.misc.DateTimeParser;
 
 import org.json.JSONException;
@@ -33,24 +35,8 @@ public class User {
         return username;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public String getJoinedAt() {
         return joinedAt;
-    }
-
-    public void setJoinedAt(String joinedAt) {
-        this.joinedAt = joinedAt;
     }
 
     public JSONObject toJSON() {
@@ -65,6 +51,7 @@ public class User {
         return jsonObject;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "User{" +

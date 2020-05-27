@@ -23,14 +23,12 @@ import com.example.tracker.models.User;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
 public class AuthForm extends LinearLayout implements Response.Listener<JSONObject>, Response.ErrorListener {
     private EditText usernameInput,passwordInput;
-    private Button actionBtn;
     private String apiEndpoint;
     private ProgressDialog progressDialog;
     private RequestQueue requestQueue;
@@ -52,14 +50,15 @@ public class AuthForm extends LinearLayout implements Response.Listener<JSONObje
         requestQueue = queue;
     }
     private void initializeView(Context context,AttributeSet set){
-        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflater = LayoutInflater.from(context);
         inflater.inflate(R.layout.view_auth_form,this,true);
         usernameInput = findViewById(R.id.username);
         passwordInput = findViewById(R.id.password);
-        actionBtn = findViewById(R.id.authActionButton);
+        Button actionBtn = findViewById(R.id.authActionButton);
         TypedArray typedArray = context.obtainStyledAttributes(set,R.styleable.AuthForm);
         actionBtn.setText(typedArray.getString(R.styleable.AuthForm_actionBtnText));
         apiEndpoint = typedArray.getString(R.styleable.AuthForm_apiEndpoint);
+        typedArray.recycle();
         actionBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -79,11 +78,11 @@ public class AuthForm extends LinearLayout implements Response.Listener<JSONObje
     public void sendRequest(User user){
         Context context = getContext();
         if(progressDialog == null){
-            progressDialog = new ProgressDialog(getContext(),"Authenticating...");
+            progressDialog = new ProgressDialog(context,"Authenticating...");
         }
         progressDialog.show();
         requestQueue.add(RequestFactory.makeJsonObjectRequest(
-                getContext(),
+                context,
                 com.android.volley.Request.Method.POST,
                 Constants.API_URL + apiEndpoint,
                 user.toJSON(),
@@ -117,7 +116,7 @@ public class AuthForm extends LinearLayout implements Response.Listener<JSONObje
     public void onErrorResponse(VolleyError error) {
         try {
             progressDialog.hide();
-            String errorMsg = new String(error.networkResponse.data, "utf-8");
+            String errorMsg = new String(error.networkResponse.data, StandardCharsets.UTF_8);
             JSONObject errorObj = new JSONObject(errorMsg);
             if(errorObj.has("username")){
                 setUsernameError(errorObj.getString("username"));
@@ -125,11 +124,7 @@ public class AuthForm extends LinearLayout implements Response.Listener<JSONObje
             if(errorObj.has("password")){
                 setPasswordError(errorObj.getString("password"));
             }
-        }
-        catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-        catch (JSONException e){
+        } catch (JSONException e){
             e.printStackTrace();
         }
     }

@@ -21,7 +21,7 @@ import org.json.JSONObject;
 
 public class AddBookmarkActivity extends BaseActivity implements Response.Listener<JSONObject>,Response.ErrorListener{
     private Spinner conditionDropdown;
-    private static String options[] = {"any","new","used"};
+    private static String[] options = {"any","new","used"};
     private EditText bookmarkName,searchWord,priceMin,priceMax;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +33,7 @@ public class AddBookmarkActivity extends BaseActivity implements Response.Listen
         searchWord = findViewById(R.id.searchWord);
         priceMax = findViewById(R.id.priceMax);
         priceMin = findViewById(R.id.priceMin);
-        ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_dropdown_item,options);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_dropdown_item,options);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         conditionDropdown.setAdapter(adapter);
     }
@@ -46,17 +46,18 @@ public class AddBookmarkActivity extends BaseActivity implements Response.Listen
             int priceMin = Integer.parseInt(this.priceMin.getText().toString());
             criteria.setMinPrice(priceMin);
         }
-        catch(NumberFormatException ex){}
+        catch(NumberFormatException ignored){
+        }
 
         try{
             int priceMax = Integer.parseInt(this.priceMax.getText().toString());
             criteria.setMaxPrice(priceMax);
         }
-        catch(NumberFormatException ex){}
+        catch(NumberFormatException ignored){
+        }
 
         String name = bookmarkName.getText().toString();
-        Bookmark bookmark = new Bookmark(name, criteria);
-        return bookmark;
+        return new Bookmark(name, criteria);
     }
 
     public void onSubmit(View view){

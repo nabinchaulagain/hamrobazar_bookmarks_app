@@ -17,6 +17,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class NotificationList extends RecyclerView {
     public NotificationList(@NonNull Context context) {
@@ -32,7 +33,7 @@ public class NotificationList extends RecyclerView {
     }
 
     public void initializeList(JSONArray notifications){
-        ((SimpleItemAnimator) this.getItemAnimator()).setSupportsChangeAnimations(true);
+        ((SimpleItemAnimator) Objects.requireNonNull(this.getItemAnimator())).setSupportsChangeAnimations(true);
         ArrayList<Notification> notificationArrayList = new ArrayList<>();
         for(int i=0;i < notifications.length();i++){
             try {
@@ -45,9 +46,5 @@ public class NotificationList extends RecyclerView {
         NotificationAdapter adapter = new NotificationAdapter(getContext(),notificationArrayList);
         this.setLayoutManager(new LinearLayoutManager(getContext()));
         this.setAdapter(adapter);
-    }
-
-    public boolean isEmpty(){
-        return this.getAdapter().getItemCount() == 0;
     }
 }

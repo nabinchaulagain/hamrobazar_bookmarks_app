@@ -1,4 +1,8 @@
 package com.example.tracker.models;
+
+
+import androidx.annotation.NonNull;
+
 import com.example.tracker.misc.DateTimeParser;
 
 import org.json.JSONException;
@@ -53,9 +57,10 @@ public class Bookmark {
         return object;
     }
 
+
     @Override
-    public String
-    toString() {
+    @NonNull
+    public String toString() {
         return "Bookmark{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +

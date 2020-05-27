@@ -2,15 +2,17 @@ package com.example.tracker.misc;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Locale;
+import java.util.Objects;
 import java.util.TimeZone;
 
 public class DateTimeParser {
     public static String getTimeFrom(String zuluTime){
         try {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault());
             sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
             long currentTime = System.currentTimeMillis();
-            long givenTime = sdf.parse(zuluTime).getTime();
+            long givenTime = Objects.requireNonNull(sdf.parse(zuluTime)).getTime();
             long diff = (currentTime - givenTime) / 1000;
             StringBuilder timeSince = new StringBuilder();
             if (diff <= 10) {

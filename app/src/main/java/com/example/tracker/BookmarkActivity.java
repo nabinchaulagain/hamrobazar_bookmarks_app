@@ -65,7 +65,7 @@ public class BookmarkActivity extends BaseActivity implements Response.Listener<
     }
 
     public void initializeCriteriaList(BookmarkCriteria criteria){
-        String listItems[] = {
+        String[] listItems = {
                 "Search word: "+criteria.getSearchWord(),
                 "Condition: "+criteria.getCondition(),
                 "Price: " +
@@ -73,7 +73,7 @@ public class BookmarkActivity extends BaseActivity implements Response.Listener<
                                 ? "not specified"
                                 : criteria.getMinPrice() + " to " + criteria.getMaxPrice())
         };
-        ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,listItems);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,listItems);
         searchCriteriaList.setAdapter(adapter);
     }
 }

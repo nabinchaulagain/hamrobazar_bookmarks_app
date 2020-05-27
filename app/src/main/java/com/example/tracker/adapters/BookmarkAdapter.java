@@ -29,7 +29,7 @@ public class BookmarkAdapter extends RecyclerView.Adapter<BookmarkHolder> {
     @NonNull
     @Override
     public BookmarkHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflater = LayoutInflater.from(context);
         View view  = inflater.inflate(R.layout.bookmark_list_item,parent,false);
         return new BookmarkHolder(view);
     }
@@ -60,8 +60,8 @@ public class BookmarkAdapter extends RecyclerView.Adapter<BookmarkHolder> {
 }
 
 class BookmarkHolder extends RecyclerView.ViewHolder{
-    protected TextView bookmarkTitle,bookmarkDate,searchWord;
-    public BookmarkHolder(@NonNull View itemView) {
+    TextView bookmarkTitle,bookmarkDate,searchWord;
+    BookmarkHolder(@NonNull View itemView) {
         super(itemView);
         bookmarkTitle = itemView.findViewById(R.id.bookmarkTitle);
         bookmarkDate = itemView.findViewById(R.id.bookmarkDate);

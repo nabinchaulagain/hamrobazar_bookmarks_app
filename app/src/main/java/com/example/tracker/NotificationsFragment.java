@@ -22,13 +22,15 @@ import com.example.tracker.models.Notification;
 import org.json.JSONArray;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 public class NotificationsFragment extends Fragment  implements Response.Listener<JSONArray>, AdapterView.OnItemSelectedListener {
-    private ArrayList<Notification> notificationArrayList;
+    private List<Notification> notificationArrayList;
     private NotificationList notificationList;
     private Spinner dropDown;
     private TextView notificationEmptyMsg;
-    private String dropDownOptions[] = new String[]{"any", "viewed", "not viewed"};
+    private String[] dropDownOptions = new String[]{"any", "viewed", "not viewed"};
     private boolean isLoading = true;
 
     @Nullable
@@ -44,7 +46,11 @@ public class NotificationsFragment extends Fragment  implements Response.Listene
         dropDown = view.findViewById(R.id.dropdown);
         notificationEmptyMsg = view.findViewById(R.id.notificationEmptyMsg);
         notificationArrayList = new ArrayList<>();
-        ArrayAdapter adapter = new ArrayAdapter(getContext(),android.R.layout.simple_spinner_dropdown_item,dropDownOptions);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                Objects.requireNonNull(getContext()),
+                android.R.layout.simple_spinner_dropdown_item,
+                dropDownOptions
+        );
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         dropDown.setAdapter(adapter);
         dropDown.setOnItemSelectedListener(this);
@@ -56,7 +62,7 @@ public class NotificationsFragment extends Fragment  implements Response.Listene
                 this,
                 null
         );
-        ((BaseActivity) getActivity()).requestQueue.add(request);
+        ((BaseActivity) Objects.requireNonNull(getActivity())).requestQueue.add(request);
     }
     @Override
     public void onResponse(JSONArray response) {
@@ -65,7 +71,7 @@ public class NotificationsFragment extends Fragment  implements Response.Listene
             return;
         }
         notificationList.initializeList(response);
-        notificationArrayList = ((NotificationAdapter)notificationList.getAdapter()).getNotificationList();
+        notificationArrayList = ((NotificationAdapter) Objects.requireNonNull(notificationList.getAdapter())).getNotificationList();
         isLoading = false;
     }
 

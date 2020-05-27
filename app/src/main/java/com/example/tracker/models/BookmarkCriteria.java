@@ -1,5 +1,7 @@
 package com.example.tracker.models;
 
+import androidx.annotation.NonNull;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -9,7 +11,7 @@ public class BookmarkCriteria{
         private String condition;
         private String searchWord;
 
-        public BookmarkCriteria(JSONObject object) throws JSONException {
+        BookmarkCriteria(JSONObject object) throws JSONException {
                 this.condition = object.getString("condition");
                 this.minPrice = object.getInt("minPrice");
                 this.maxPrice = object.getInt("maxPrice");
@@ -32,10 +34,6 @@ public class BookmarkCriteria{
                 this.condition = condition;
         }
 
-        public void setSearchWord(String searchWord) {
-                this.searchWord = searchWord;
-        }
-
         public int getMinPrice() {
                 return minPrice;
         }
@@ -52,7 +50,7 @@ public class BookmarkCriteria{
                 return searchWord;
         }
 
-        public JSONObject toJSON(){
+        JSONObject toJSON(){
                 JSONObject obj = new JSONObject();
                 try {
                         obj.put("condition", this.getCondition());
@@ -61,11 +59,12 @@ public class BookmarkCriteria{
                         obj.put("searchWord",this.getSearchWord());
                 }
                 catch(JSONException ex){
-
+                        ex.printStackTrace();
                 }
                 return obj;
         }
 
+        @NonNull
         @Override
         public String toString() {
                 return "BookmarkCriteria{" +

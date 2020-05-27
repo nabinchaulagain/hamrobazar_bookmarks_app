@@ -1,12 +1,14 @@
 package com.example.tracker.models;
 
+import androidx.annotation.NonNull;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class Item {
     private String name,price,link;
 
-    public Item(JSONObject object) throws JSONException {
+    Item(JSONObject object) throws JSONException {
         this.name = object.getString("name");
         this.price = object.getString("price");
         this.link = object.getString("link");
@@ -24,6 +26,7 @@ public class Item {
         return link;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "Item{" +

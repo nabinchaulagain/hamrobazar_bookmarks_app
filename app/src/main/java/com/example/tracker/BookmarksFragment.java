@@ -28,15 +28,16 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-
 import java.util.ArrayList;
+import java.util.List;
 
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
+
+import static java.util.Objects.requireNonNull;
 
 public class BookmarksFragment extends Fragment implements Response.Listener<JSONArray>,Response.ErrorListener {
     private RecyclerView bookmarksList;
     private ProgressBar progressBar;
-    private FloatingActionButton addBtn;
     private TextView bookmarksEmptyMsg;
 
     @Override
@@ -50,7 +51,7 @@ public class BookmarksFragment extends Fragment implements Response.Listener<JSO
         Context context = getContext();
         bookmarksList = view.findViewById(R.id.bookmarksList);
         progressBar = view.findViewById(R.id.progressBar);
-        addBtn = view.findViewById(R.id.floatingActionButton);
+        FloatingActionButton addBtn = view.findViewById(R.id.floatingActionButton);
         bookmarksEmptyMsg = view.findViewById(R.id.bookmarksEmptyMsg);
         bookmarksList.setLayoutManager(new LinearLayoutManager(context));
         JsonArrayRequest request = RequestFactory.makeJsonArrayRequest(
@@ -61,7 +62,7 @@ public class BookmarksFragment extends Fragment implements Response.Listener<JSO
                 this,
                 this
         );
-        ((BaseActivity)getActivity()).requestQueue.add(request);
+        ((BaseActivity) requireNonNull(getActivity())).requestQueue.add(request);
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(getItemTouchCallback());
         itemTouchHelper.attachToRecyclerView(bookmarksList);
         addBtn.setOnClickListener(new View.OnClickListener() {
@@ -98,16 +99,16 @@ public class BookmarksFragment extends Fragment implements Response.Listener<JSO
         bookmarksList.setAdapter(new BookmarkAdapter(getContext(),bookmarks));
         bookmarksList.setVisibility(View.VISIBLE);
         progressBar.setVisibility(View.GONE);
-        getActivity().findViewById(R.id.floatingActionButton).setVisibility(View.VISIBLE);
+        requireNonNull(getActivity()).findViewById(R.id.floatingActionButton).setVisibility(View.VISIBLE);
     }
 
-    public void goToAddBookmark(){
+    private void goToAddBookmark(){
         Intent intent = new Intent(getActivity(),AddBookmarkActivity.class);
         startActivity(intent);
     }
 
-    public ItemTouchHelper.SimpleCallback getItemTouchCallback(){
-        ItemTouchHelper.SimpleCallback callback= new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT){
+    private ItemTouchHelper.SimpleCallback getItemTouchCallback(){
+        return new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT){
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
                 return true;
@@ -117,7 +118,7 @@ public class BookmarksFragment extends Fragment implements Response.Listener<JSO
             public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
                 super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
                 new RecyclerViewSwipeDecorator.Builder(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
-                        .addBackgroundColor(ContextCompat.getColor(getContext(), android.R.color.holo_red_light))
+                        .addBackgroundColor(ContextCompat.getColor(requireNonNull(getContext()), android.R.color.holo_red_light))
                         .addActionIcon(android.R.drawable.ic_menu_delete)
                         .create()
                         .decorate();
@@ -125,13 +126,13 @@ public class BookmarksFragment extends Fragment implements Response.Listener<JSO
 
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                BookmarkAdapter adapter = (BookmarkAdapter) bookmarksList.getAdapter();
+                BookmarkAdapter adapter = (BookmarkAdapter) requireNonNull(bookmarksList.getAdapter());
                 int index = viewHolder.getAdapterPosition();
-                ArrayList<Bookmark> list = adapter.getList();
-                Bookmark bookmark = list.get(index);
+                List list = adapter.getList();
+                Bookmark bookmark = (Bookmark) list.get(index);
                 list.remove(index);
                 bookmarksList.getAdapter().notifyItemRemoved(index);
-                ((BaseActivity)getActivity()).requestQueue.add(RequestFactory.makeJsonObjectRequest(
+                ((BaseActivity) requireNonNull(getActivity())).requestQueue.add(RequestFactory.makeJsonObjectRequest(
                         getContext(),
                         com.android.volley.Request.Method.DELETE,
                         Constants.API_URL+"/bookmarks/"+bookmark.getId()
@@ -141,6 +142,5 @@ public class BookmarksFragment extends Fragment implements Response.Listener<JSO
                 ));
             }
         };
-        return callback;
     }
 }

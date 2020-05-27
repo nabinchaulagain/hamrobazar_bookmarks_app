@@ -9,14 +9,10 @@ import android.widget.TextView;
 import com.example.tracker.R;
 
 public class ProgressDialog {
-    Context context;
-    String loadingMsg;
-    AlertDialog dialog;
+    private AlertDialog dialog;
 
     public ProgressDialog(Context context, String loadingMsg) {
-        this.context = context;
-        this.loadingMsg = loadingMsg;
-        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflater = LayoutInflater.from(context);
         View dialogView = inflater.inflate(R.layout.dialog_progress,null);
         TextView loadingTextView = dialogView.findViewById(R.id.loadingTextView);
         loadingTextView.setText(loadingMsg);

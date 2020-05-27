@@ -1,9 +1,8 @@
 package com.example.tracker.models;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.Volley;
-import com.example.tracker.misc.DateTimeParser;
+import androidx.annotation.NonNull;
 
+import com.example.tracker.misc.DateTimeParser;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -39,6 +38,7 @@ public class Notification {
         isNotified = notified;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "Notification{" +

@@ -1,6 +1,5 @@
 package com.example.tracker;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -20,10 +19,11 @@ import com.example.tracker.models.User;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Objects;
+
 public class ProfileFragment extends Fragment implements Response.Listener<JSONObject> {
-    Button logoutBtn;
-    TextView username,bookmarksCount,notificationsCount,joinedDate;
-    LogoutListener logoutListener;
+    private TextView username,bookmarksCount,notificationsCount,joinedDate;
+    private LogoutListener logoutListener;
 
     public ProfileFragment(LogoutListener logoutListener) {
         this.logoutListener = logoutListener;
@@ -41,7 +41,7 @@ public class ProfileFragment extends Fragment implements Response.Listener<JSONO
         username = view.findViewById(R.id.profileUsername);
         bookmarksCount = view.findViewById(R.id.bookmarksCount);
         notificationsCount = view.findViewById(R.id.notificationsCount);
-        logoutBtn = view.findViewById(R.id.logoutBtn);
+        Button logoutBtn = view.findViewById(R.id.logoutBtn);
         joinedDate = view.findViewById(R.id.profileJoinedDate);
         JsonObjectRequest request = RequestFactory.makeJsonObjectRequest(
                 this.getContext(),
@@ -51,7 +51,8 @@ public class ProfileFragment extends Fragment implements Response.Listener<JSONO
                 this,
                 null
         );
-        ((BaseActivity)this.getActivity()).requestQueue.add(request);
+        ((BaseActivity) Objects.requireNonNull(this.getActivity())).
+                requestQueue.add(request);
         logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

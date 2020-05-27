@@ -1,7 +1,6 @@
 package com.example.tracker;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -17,7 +16,6 @@ import com.example.tracker.misc.NotificationBackgroundJob;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends BaseActivity implements BottomNavigationView.OnNavigationItemSelectedListener,LogoutListener {
-    private BottomNavigationView bottomNav;
     private AlertDialog exitDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +25,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer,
                     new BookmarksFragment()).commit();
         }
-        bottomNav = findViewById(R.id.navigation);
+        BottomNavigationView bottomNav = findViewById(R.id.navigation);
         bottomNav.setOnNavigationItemSelectedListener(this);
     }
 

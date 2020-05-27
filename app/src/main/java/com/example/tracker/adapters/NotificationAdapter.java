@@ -16,21 +16,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.tracker.Constants;
 import com.example.tracker.R;
 import com.example.tracker.misc.RequestFactory;
 import com.example.tracker.models.Item;
 import com.example.tracker.models.Notification;
-
-import java.util.ArrayList;
+import java.util.List;
 
 public class NotificationAdapter extends RecyclerView.Adapter<NotificationHolder> {
-    Context context;
-    ArrayList<Notification> notificationList;
+    private Context context;
+    private List<Notification> notificationList;
 
-    public NotificationAdapter(Context context, ArrayList notificationList){
+    public NotificationAdapter(Context context, List<Notification> notificationList){
         this.notificationList = notificationList;
         this.context = context;
     }
@@ -38,7 +36,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationHolder
     @NonNull
     @Override
     public NotificationHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.notification_list_item,parent,false);
         return new NotificationHolder(view);
     }
@@ -80,7 +78,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationHolder
         });
     }
 
-    public void setNotificationReceived(String notificationId){
+    private void setNotificationReceived(String notificationId){
         RequestQueue queue = Volley.newRequestQueue(context);
         queue.add(RequestFactory.makeJsonObjectRequest(
                 context,
@@ -97,7 +95,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationHolder
         return notificationList.size();
     }
 
-    public ArrayList<Notification> getNotificationList(){
+    public List<Notification> getNotificationList(){
         return this.notificationList;
     }
 }
@@ -105,10 +103,11 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationHolder
 class NotificationHolder extends RecyclerView.ViewHolder{
     TextView itemName,itemPrice,foundAt;
     Button viewInBrowserBtn;
-    LinearLayout notificationHeader,collapsable;
-    ImageView arrow;
+    LinearLayout notificationHeader;
+    private LinearLayout collapsable;
+    private ImageView arrow;
     boolean isExpanded = false;
-    public NotificationHolder(@NonNull View itemView) {
+    NotificationHolder(@NonNull View itemView) {
         super(itemView);
         itemName = itemView.findViewById(R.id.itemName);
         itemPrice = itemView.findViewById(R.id.itemPrice);
@@ -118,20 +117,20 @@ class NotificationHolder extends RecyclerView.ViewHolder{
         collapsable = itemView.findViewById(R.id.collapsable);
         arrow = itemView.findViewById(R.id.arrow);
     }
-    public void setAsNotified(){
+    void setAsNotified(){
         this.itemView.setAlpha(0.5f);
     }
-    public void setAsNotNotified(){
+    void setAsNotNotified(){
         this.itemView.setAlpha(1f);
     }
 
-    public void expand(){
+    void expand(){
         isExpanded = true;
         arrow.setImageResource(R.drawable.ic_keyboard_arrow_up_black_24dp);
         collapsable.setVisibility(View.VISIBLE);
     }
 
-    public void collapse(){
+    void collapse(){
         isExpanded = false;
         arrow.setImageResource(R.drawable.ic_keyboard_arrow_down_black_24dp);
         collapsable.setVisibility(View.GONE);

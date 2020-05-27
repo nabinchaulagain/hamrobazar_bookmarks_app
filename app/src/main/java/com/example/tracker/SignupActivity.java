@@ -1,17 +1,10 @@
 package com.example.tracker;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
-import com.example.tracker.models.User;
+import java.util.Objects;
 
 public class SignupActivity extends BaseActivity {
     AuthForm authForm;
@@ -19,7 +12,7 @@ public class SignupActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
-        getSupportActionBar().hide();
+        Objects.requireNonNull(getSupportActionBar()).hide();
         authForm = findViewById(R.id.authForm);
         authForm.setRequestQueue(requestQueue);
     }
