@@ -47,6 +47,7 @@ public class BookmarkActivity extends BaseActivity implements Response.Listener<
     public void onResponse(JSONObject response) {
         try {
             Bookmark bookmark = new Bookmark(response);
+            System.out.println(response.toString());
             setTitle(Html.fromHtml(bookmark.getName()+" <small><small><small><small>(bookmarked "+ bookmark.getDate()+")</small></small></small></small>"));
             findViewById(R.id.bookmarkContainer).setVisibility(View.VISIBLE);
             findViewById(R.id.progressBar).setVisibility(View.GONE);

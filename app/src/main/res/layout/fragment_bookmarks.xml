@@ -43,7 +43,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.060000002"
         app:fabSize="normal"
-        android:backgroundTint="@android:color/black"
         />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -51,11 +50,10 @@
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginBottom="8dp"
-        android:alpha="0.6"
         android:clickable="true"
         android:focusable="true"
         android:focusableInTouchMode="true"
-        app:backgroundTint="#6A6969"
+        app:backgroundTint="#040404"
         app:fabCustomSize="84dp"
         app:fabSize="auto"
         app:layout_constraintBottom_toBottomOf="parent"

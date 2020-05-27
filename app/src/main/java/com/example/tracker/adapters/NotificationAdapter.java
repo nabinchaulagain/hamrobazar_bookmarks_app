@@ -119,7 +119,7 @@ class NotificationHolder extends RecyclerView.ViewHolder{
         arrow = itemView.findViewById(R.id.arrow);
     }
     public void setAsNotified(){
-        this.itemView.setAlpha(0.7f);
+        this.itemView.setAlpha(0.5f);
     }
     public void setAsNotNotified(){
         this.itemView.setAlpha(1f);

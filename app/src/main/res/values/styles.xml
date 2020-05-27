@@ -9,6 +9,9 @@
         <item name="android:buttonStyle">
             @style/BtnDefaultStyle
         </item>
+        <item name="android:windowBackground">
+            @drawable/app_background
+        </item>
 
     </style>
     <style name="TextViewDefaultStyle" parent="android:Widget.TextView">
@@ -28,6 +31,6 @@
     <style name="BtnDangerStyle">
         <item name="android:background">@drawable/btn_danger_background</item>
         <item name="android:textColor">#fff</item>
-        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">16dp</item>
     </style>
 </resources>

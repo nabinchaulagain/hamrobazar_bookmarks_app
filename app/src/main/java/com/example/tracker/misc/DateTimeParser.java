@@ -13,9 +13,7 @@ public class DateTimeParser {
             long givenTime = sdf.parse(zuluTime).getTime();
             long diff = (currentTime - givenTime) / 1000;
             StringBuilder timeSince = new StringBuilder();
-            if (diff < 0) {
-                throw new IllegalArgumentException("invalid date");
-            } else if (diff <= 10) {
+            if (diff <= 10) {
                 timeSince.append("few seconds ago");
             } else if (diff < 60) {
                 timeSince.append(diff);
