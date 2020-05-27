@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="10dp"
@@ -26,14 +25,15 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="TextView"
-            android:textSize="16dp" />
+            android:textSize="16sp" />
 
         <ImageView
             android:id="@+id/arrow"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="10"
-            app:srcCompat="@drawable/ic_keyboard_arrow_down_black_24dp" />
+            app:srcCompat="@drawable/ic_keyboard_arrow_down_black_24dp"
+            android:contentDescription="down"/>
     </LinearLayout>
 
     <LinearLayout
@@ -52,7 +52,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="TextView"
             android:textSize="14sp" />
 
         <TextView
@@ -60,8 +59,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="TextView"
-            android:textSize="14dp" />
+            android:textSize="14sp" />
 
         <Button
             android:id="@+id/viewInBrowserBtn"

@@ -25,12 +25,12 @@
         <item name="android:paddingBottom">10dp</item>
         <item name="android:paddingLeft">30dp</item>
         <item name="android:paddingRight">30dp</item>
-        <item name="android:textSize">20dp</item>
+        <item name="android:textSize">20sp</item>
         <item name="android:background">@drawable/btn_default_background</item>
     </style>
     <style name="BtnDangerStyle">
         <item name="android:background">@drawable/btn_danger_background</item>
         <item name="android:textColor">#fff</item>
-        <item name="android:textSize">16dp</item>
+        <item name="android:textSize">16sp</item>
     </style>
 </resources>
