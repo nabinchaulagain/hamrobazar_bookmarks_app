@@ -81,7 +81,7 @@ public class BookmarksFragment extends Fragment implements Response.Listener<JSO
     @Override
     public void onResponse(JSONArray response) {
         if(response.length() == 0){
-            bookmarksEmptyMsg.setText("No bookmarks found !!!");
+            bookmarksEmptyMsg.setText(R.string.msg_empty_bookmarks);
             bookmarksEmptyMsg.setVisibility(View.VISIBLE);
             progressBar.setVisibility(View.GONE);
             return;

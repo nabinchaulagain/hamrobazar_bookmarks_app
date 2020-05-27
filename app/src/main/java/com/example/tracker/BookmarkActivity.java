@@ -55,7 +55,7 @@ public class BookmarkActivity extends BaseActivity implements Response.Listener<
             JSONArray notifications =response.getJSONArray("notifications");
             if(notifications.length() == 0){
                 notificationEmptyMsg.setVisibility(View.VISIBLE);
-                notificationEmptyMsg.setText("No notifications found !!!");
+                notificationEmptyMsg.setText(R.string.msg_empty_notifications);
                 return;
             }
             bookmarkNotifications.initializeList(notifications);

@@ -27,7 +27,7 @@
                 android:id="@+id/textView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Search Criteria"
+                android:text="@string/header_bookmark_search_criteria"
                 android:textAlignment="center"
                 android:textSize="24sp" />
 
@@ -47,7 +47,7 @@
                 android:id="@+id/textView3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Latest Notifications"
+                android:text="@string/header_bookmark_notifications"
                 android:textAlignment="center"
                 android:textSize="24sp" />
             <FrameLayout

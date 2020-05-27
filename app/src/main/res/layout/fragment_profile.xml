@@ -30,7 +30,7 @@
                 android:src="@drawable/ic_person_blackdp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                android:contentDescription="no"/>
+                android:contentDescription="@string/icon_person_description"/>
         </androidx.cardview.widget.CardView>
 
         <TextView
@@ -75,7 +75,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                android:weightSum="2">
+                android:weightSum="2"
+                android:baselineAligned="false">
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -87,7 +88,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Bookmarks"
+                        android:text="@string/header_bookmarks"
                         android:textSize="18sp" />
 
                     <TextView
@@ -110,7 +111,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Notifications"
+                        android:text="@string/header_notifications"
                         android:textSize="18sp" />
 
                     <TextView
@@ -136,11 +137,11 @@
             style="@style/BtnDangerStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Logout"
+            android:text="@string/btn_text_logout"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.060000002" />
+            app:layout_constraintVertical_bias="0.06" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>

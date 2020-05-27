@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:textAlignment="textEnd"
             android:layout_weight="1"
-            android:text="Filter by"
+            android:text="@string/label_notification_filter_by"
             android:textSize="20sp" />
 
         <Spinner

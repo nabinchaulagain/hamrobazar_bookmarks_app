@@ -2,8 +2,6 @@ package com.example.tracker;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.view.animation.Animation;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;

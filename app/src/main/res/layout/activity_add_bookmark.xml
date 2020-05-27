@@ -23,7 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="40dp"
-            android:hint="Bookmark description"
+            android:hint="@string/hint_bookmark_name"
             android:importantForAutofill="no"
             android:inputType="text"  />
 
@@ -32,7 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="40dp"
-            android:hint="Search keyword"
+            android:hint="@string/hint_search_word"
             android:importantForAutofill="no"
             android:inputType="text" />
 
@@ -41,7 +41,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="40dp"
-            android:hint="Minimum price"
+            android:hint="@string/hint_min_price"
             android:inputType="number"
             android:importantForAutofill="no"
             />
@@ -51,7 +51,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="40dp"
-            android:hint="Maximum price"
+            android:hint="@string/hint_max_price"
             android:inputType="number"
             android:importantForAutofill="no"/>
 
@@ -65,7 +65,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Condition: "
+                android:text="@string/item_condition"
                 android:textSize="20sp"
                 />
 
@@ -84,7 +84,7 @@
             android:layout_marginTop="10dp"
             android:layout_weight="1"
             android:onClick="onSubmit"
-            android:text="Add Bookmark" />
+            android:text="@string/submit_text_add_bookmark" />
 
     </LinearLayout>
 

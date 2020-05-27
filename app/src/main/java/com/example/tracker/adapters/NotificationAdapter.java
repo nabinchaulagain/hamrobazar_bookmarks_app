@@ -52,8 +52,8 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationHolder
             holder.setAsNotNotified();
         }
         holder.itemName.setText(item.getName());
-        holder.itemPrice.setText("Price: "+item.getPrice());
-        holder.foundAt.setText("Found: "+notification.getFoundAt());
+        holder.itemPrice.setText(context.getResources().getString(R.string.item_price,item.getPrice()));
+        holder.foundAt.setText(context.getResources().getString(R.string.item_found_date,notification.getFoundAt()));
         holder.notificationHeader.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {

@@ -1,19 +1,30 @@
 <resources>
-    <string name="app_name">tracker</string>
-    <string name="title_activity_login">Sign in</string>
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password</string>
-    <string name="action_sign_in">Sign in or register</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="welcome">"Welcome !"</string>
-    <string name="invalid_username">Not a valid username</string>
-    <string name="invalid_password">Password must be >5 characters</string>
-    <string name="login_failed">"Login failed"</string>
-    <string name="title_activity_oop">oop</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="app_name">Hamrobookmark</string>
+    <string name="hint_bookmark_name">Bookmark description</string>
+    <string name="hint_search_word">Search keyword</string>
+    <string name="hint_min_price">Minimum price</string>
+    <string name="hint_max_price">Maximum price</string>
+    <string name="item_condition">Condition:</string>
+    <string name="submit_text_add_bookmark">Add Bookmark</string>
+    <string name="header_bookmark_search_criteria">Search Criteria</string>
+    <string name="header_bookmark_notifications">Latest Notifications</string>
+    <string name="header_login">Login</string>
+    <string name="link_text_register">Create new account</string>
+    <string name="header_signup">Sign Up</string>
+    <string name="link_text_login">Already have an account? Login</string>
+    <string name="label_notification_filter_by">Filter by</string>
+    <string name="icon_person_description">person</string>
+    <string name="header_bookmarks">Bookmarks</string>
+    <string name="header_notifications">Notifications</string>
+    <string name="btn_text_logout">Logout</string>
+    <string name="icon_down_description">Down</string>
+    <string name="icon_up_description">Up</string>
+    <string name="btn_text_open_in_browser">View in browser</string>
+    <string name="hint_username">Username</string>
+    <string name="hint_password">Password</string>
+    <string name="item_price">Price: %1$s</string>
+    <string name="item_found_date">Found: %1$s</string>
+    <string name="msg_empty_notifications">No notifications found !!!</string>
+    <string name="msg_empty_bookmarks">No bookmarks found !!!</string>
 </resources>
+
