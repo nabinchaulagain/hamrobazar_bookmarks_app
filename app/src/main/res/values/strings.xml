@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Hamrobookmark</string>
+    <string name="app_name">Hamro Bookmark</string>
     <string name="hint_bookmark_name">Bookmark description</string>
     <string name="hint_search_word">Search keyword</string>
     <string name="hint_min_price">Minimum price</string>
