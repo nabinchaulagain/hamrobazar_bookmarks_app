@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="10dp"
-    tools:context=".BookmarkActivity">
+    tools:context=".activities.BookmarkActivity">
     <LinearLayout
         android:id="@+id/bookmarkContainer"
         android:layout_width="0dp"
@@ -62,7 +62,7 @@
                     android:visibility="gone"
                     android:layout_marginTop="16dp"
                     />
-                <com.example.tracker.NotificationList
+                <com.example.hamrobookmark.custom_views.NotificationList
                     android:id="@+id/bookmarkNotifications"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />

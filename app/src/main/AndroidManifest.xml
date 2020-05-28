@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.tracker">
+    package="com.example.hamrobookmark">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
@@ -16,21 +16,20 @@
         android:usesCleartextTraffic="true"
         android:fullBackupContent="true"
         tools:targetApi="m">
-        <activity android:name=".MainActivity"  android:configChanges="orientation|screenSize"/>
-        <activity android:name=".SignupActivity" android:configChanges="orientation|screenSize" />
-        <activity android:name=".LoginActivity" android:configChanges="orientation|screenSize"/>
-        <activity android:name=".BookmarkActivity" android:configChanges="orientation|screenSize" />
-        <activity android:name=".AddBookmarkActivity" android:configChanges="orientation|screenSize"/>
-        <activity android:name=".SplashActivity" android:configChanges="orientation|screenSize">
+        <activity android:name="com.example.hamrobookmark.activities.MainActivity"  android:configChanges="orientation|screenSize"/>
+        <activity android:name="com.example.hamrobookmark.activities.SignupActivity" android:configChanges="orientation|screenSize" />
+        <activity android:name="com.example.hamrobookmark.activities.LoginActivity" android:configChanges="orientation|screenSize"/>
+        <activity android:name="com.example.hamrobookmark.activities.BookmarkActivity" android:configChanges="orientation|screenSize" />
+        <activity android:name="com.example.hamrobookmark.activities.AddBookmarkActivity" android:configChanges="orientation|screenSize"/>
+        <activity android:name="com.example.hamrobookmark.activities.SplashActivity" android:configChanges="orientation|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".BaseActivity" />
-
+        <activity android:name="com.example.hamrobookmark.activities.BaseActivity" />
         <service
-            android:name=".NotificationService"
+            android:name="com.example.hamrobookmark.services.NotificationService"
             android:exported="true"
             android:permission="android.permission.BIND_JOB_SERVICE" />
     </application>

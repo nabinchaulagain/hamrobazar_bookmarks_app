@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SignupActivity"
+    tools:context=".activities.SignupActivity"
     android:background="@drawable/white_background_rounded"
     android:layout_marginHorizontal="15dp"
     android:layout_marginVertical="30dp">
@@ -19,7 +19,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.example.tracker.AuthForm
+    <com.example.hamrobookmark.custom_views.AuthForm
         android:id="@+id/authForm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
